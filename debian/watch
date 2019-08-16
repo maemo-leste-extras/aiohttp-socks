@@ -1,0 +1,4 @@
+version=4
+opts="filenamemangle=s%(?:.*?)?v?(\d[\d.]*)\.tar\.gz%aiohttp-socks-$1.tar.gz%" \
+   https://github.com/romis2012/aiohttp-socks/tags \
+   (?:.*?/)?v?(\d[\d.]*)\.tar\.gz debian uupdate

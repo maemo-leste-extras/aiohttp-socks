@@ -1,0 +1,5 @@
+aiohttp-socks (0.2.2-1) UNRELEASED; urgency=medium
+
+  * Initial release (Closes: #934908)
+
+ -- Laurent Bigonville <bigon@debian.org>  Thu, 02 May 2019 11:51:37 +0200
