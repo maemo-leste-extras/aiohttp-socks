@@ -3,8 +3,9 @@ sudo: false
 language: python
 
 python:
-  - "3.5"
+#  - "3.5"
   - "3.6"
+  - "3.7"
 
 env:
   - SKIP_IPV6_TESTS=true
@@ -19,6 +20,7 @@ install:
 script:
   - flake8 aiohttp_socks tests
   - pytest --cov=./aiohttp_socks tests/ -s
+#  - pytest --cov=./aiohttp_socks tests/ --cov-report term-missing -s
 
 after_success:
   - coveralls

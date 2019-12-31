@@ -32,12 +32,13 @@ setup(
     version=version,
     license='Apache 2',
     url='https://github.com/romis2012/aiohttp-socks',
-    description='SOCKS proxy connector for aiohttp',
+    description='Proxy connector for aiohttp',
     long_description=long_description,
     long_description_content_type='text/markdown',
-    packages=['aiohttp_socks'],
-    keywords='asyncio aiohttp socks socks5 socks4 proxy',
+    packages=['aiohttp_socks', 'aiohttp_socks.proxy'],
+    keywords='asyncio aiohttp socks socks5 socks4 http proxy',
     install_requires=[
         'aiohttp>=2.3.2',
+        'attrs>=19.2.0',
     ],
 )

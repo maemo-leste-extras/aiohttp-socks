@@ -1,14 +1,15 @@
 ## aiohttp-socks
 
 [![Build Status](https://travis-ci.org/romis2012/aiohttp-socks.svg?branch=master)](https://travis-ci.org/romis2012/aiohttp-socks)
-[![Coverage Status](https://coveralls.io/repos/github/romis2012/aiohttp-socks/badge.svg?branch=master)](https://coveralls.io/github/romis2012/aiohttp-socks?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/romis2012/aiohttp-socks/badge.svg?branch=master&_=x)](https://coveralls.io/github/romis2012/aiohttp-socks?branch=master)
 [![PyPI version](https://badge.fury.io/py/aiohttp-socks.svg)](https://badge.fury.io/py/aiohttp-socks)
 
-SOCKS proxy connector for [aiohttp](https://github.com/aio-libs/aiohttp). SOCKS4(a) and SOCKS5 are supported.
+Proxy connector for [aiohttp](https://github.com/aio-libs/aiohttp). 
+SOCKS4(a), SOCKS5, HTTP (tunneling), Proxy chains are supported.
 
 ## Requirements
 - Python >= 3.5.3
-- aiohttp >= 2.3.2  # including v3.x
+- aiohttp >= 2.3.2
 
 ## Installation
 ```
@@ -20,20 +21,30 @@ pip install aiohttp_socks
 #### aiohttp usage:
 ```python
 import aiohttp
-from aiohttp_socks import SocksConnector, SocksVer
+from aiohttp_socks import ProxyType, ProxyConnector, ChainProxyConnector
 
 
 async def fetch(url):
-    connector = SocksConnector.from_url('socks5://user:password@127.0.0.1:1080')
-    ### or use SocksConnector constructor
-    # connector = SocksConnector(
-    #     socks_ver=SocksVer.SOCKS5,
+    # We have added http proxy support, so SocksConnector has been deprecated
+    # connector = SocksConnector.from_url('socks5://user:password@127.0.0.1:1080')
+    connector = ProxyConnector.from_url('socks5://user:password@127.0.0.1:1080')
+    
+    ### or use ProxyConnector constructor
+    # connector = ProxyConnector(
+    #     proxy_type=ProxyType.SOCKS5,
     #     host='127.0.0.1',
     #     port=1080,
     #     username='user',
     #     password='password',
     #     rdns=True
     # )
+    
+    ### proxy chaining (since ver 0.3.3)
+    # connector = ChainProxyConnector.from_urls([
+    #     'socks5://user:password@127.0.0.1:1080',
+    #     'socks4://127.0.0.1:1081',
+    #     'http://user:password@127.0.0.1:3128',
+    # ])
     async with aiohttp.ClientSession(connector=connector) as session:
         async with session.get(url) as response:
             return await response.text()
@@ -46,7 +57,7 @@ from aiohttp_socks import open_connection
 
 async def fetch():
     reader, writer = await open_connection(
-        socks_url='socks5://user:password@127.0.0.1:1080',
+        proxy_url='socks5://user:password@127.0.0.1:1080',
         host='check-host.net',
         port=80
     )
