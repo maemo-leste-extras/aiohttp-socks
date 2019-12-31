@@ -1,17 +1,18 @@
-# -*- coding: utf-8 -*-
-from .proto import SocksVer
-from .connector import SocksConnector
-from .helpers import open_connection, create_connection
-from .errors import (
-    SocksError, NoAcceptableAuthMethods, UnknownAuthMethod,
-    LoginAuthenticationFailed, InvalidServerVersion, InvalidServerReply,
-    SocksConnectionError
+from .proxy import SocksVer, ProxyType
+from .connector import (
+    SocksConnector, ProxyConnector,
+    ChainProxyConnector, ProxyInfo
+)
+from .utils import open_connection, create_connection
+from .proxy.errors import (
+    ProxyError, ProxyConnectionError,
+    SocksError, SocksConnectionError,
 )
 
-__version__ = '0.2.2'
+__version__ = '0.3.3'
 
-__all__ = ('SocksConnector', 'SocksVer',
-           'SocksError', 'NoAcceptableAuthMethods', 'UnknownAuthMethod',
-           'LoginAuthenticationFailed', 'InvalidServerVersion',
-           'InvalidServerReply', 'SocksConnectionError', 'open_connection',
-           'create_connection')
+__all__ = ('SocksConnector', 'ProxyConnector', 'ChainProxyConnector',
+           'ProxyInfo', 'SocksVer', 'ProxyType',
+           'ProxyError', 'ProxyConnectionError',
+           'SocksError', 'SocksConnectionError',
+           'open_connection', 'create_connection')
