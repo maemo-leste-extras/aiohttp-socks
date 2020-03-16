@@ -1,3 +1,9 @@
+aiohttp-socks (0.3.4-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Piotr Ożarowski <piotr@debian.org>  Mon, 16 Mar 2020 12:21:37 +0100
+
 aiohttp-socks (0.3.3-1) unstable; urgency=medium
 
   [ Ondřej Nový ]
