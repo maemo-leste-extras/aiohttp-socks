@@ -5,6 +5,7 @@ from typing import Iterable
 import attr
 from aiohttp import TCPConnector
 from aiohttp.abc import AbstractResolver
+from aiohttp.helpers import CeilTimeout  # noqa
 
 from .proxy import (ProxyType, SocksVer, ChainProxy,
                     parse_proxy_url, create_proxy)
@@ -54,7 +55,12 @@ class SocksConnector(TCPConnector):  # pragma: no cover
             username=self._socks_username, password=self._socks_password,
             rdns=self._rdns, family=self._socks_family)
 
-        await proxy.connect(host, port)
+        timeout = kwargs.get('timeout')
+        if timeout is not None and hasattr(timeout, 'sock_connect'):
+            with CeilTimeout(timeout.sock_connect):
+                await proxy.connect(host, port)
+        else:
+            await proxy.connect(host, port)
 
         return await super()._wrap_create_connection(
             protocol_factory, None, None, sock=proxy.socket, **kwargs)
@@ -98,7 +104,12 @@ class ProxyConnector(TCPConnector):
             username=self._proxy_username, password=self._proxy_password,
             rdns=self._rdns, family=self._proxy_family)
 
-        await proxy.connect(host, port)
+        timeout = kwargs.get('timeout')
+        if timeout is not None and hasattr(timeout, 'sock_connect'):
+            with CeilTimeout(timeout.sock_connect):
+                await proxy.connect(host, port)
+        else:
+            await proxy.connect(host, port)
 
         return await super()._wrap_create_connection(
             protocol_factory, None, None, sock=proxy.socket, **kwargs)
