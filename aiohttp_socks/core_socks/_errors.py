@@ -4,9 +4,9 @@ class ProxyError(Exception):
         self.error_code = error_code
 
 
-class ProxyConnectionError(OSError):
+class ProxyTimeoutError(Exception):
     pass
 
 
-SocksError = ProxyError
-SocksConnectionError = ProxyConnectionError
+class ProxyConnectionError(OSError):
+    pass
