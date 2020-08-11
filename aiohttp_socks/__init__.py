@@ -1,18 +1,42 @@
-from .proxy import SocksVer, ProxyType
+__title__ = 'aiohttp-socks'
+__version__ = '0.5.3'
+
+from .core_socks import (
+    ProxyError,
+    ProxyTimeoutError,
+    ProxyConnectionError,
+    ProxyType
+)
+
 from .connector import (
-    SocksConnector, ProxyConnector,
-    ChainProxyConnector, ProxyInfo
+    ProxyConnector,
+    ChainProxyConnector,
+    ProxyInfo
 )
 from .utils import open_connection, create_connection
-from .proxy.errors import (
-    ProxyError, ProxyConnectionError,
-    SocksError, SocksConnectionError,
+
+from ._deprecated import (
+    SocksVer,
+    SocksConnector,
+    SocksConnectionError,
+    SocksError
 )
 
-__version__ = '0.3.9'
+__all__ = (
+    '__title__',
+    '__version__',
+    'ProxyConnector',
+    'ChainProxyConnector',
+    'ProxyInfo',
+    'ProxyType',
+    'ProxyError',
+    'ProxyConnectionError',
+    'ProxyTimeoutError',
+    'open_connection',
+    'create_connection',
 
-__all__ = ('SocksConnector', 'ProxyConnector', 'ChainProxyConnector',
-           'ProxyInfo', 'SocksVer', 'ProxyType',
-           'ProxyError', 'ProxyConnectionError',
-           'SocksError', 'SocksConnectionError',
-           'open_connection', 'create_connection')
+    'SocksVer',
+    'SocksConnector',
+    'SocksError',
+    'SocksConnectionError',
+)
