@@ -7,6 +7,8 @@ aiohttp-socks (0.5.3-2) UNRELEASED; urgency=low
   [ Ondřej Nový ]
   * d/control: Update Maintainer field with new Debian Python Team
     contact address.
+  * d/control: Update Vcs-* fields with new Debian Python Team Salsa
+    layout.
 
  -- Debian Janitor <janitor@jelmer.uk>  Sun, 16 Aug 2020 04:36:11 -0000
 
