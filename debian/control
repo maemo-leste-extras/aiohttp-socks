@@ -1,7 +1,7 @@
 Source: aiohttp-socks
 Section: python
 Priority: optional
-Maintainer: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Maintainer: Debian Python Team <team+python@tracker.debian.org>
 Uploaders: Piotr Ożarowski <piotr@debian.org>
 Build-Depends: ca-certificates <!nocheck>,
                debhelper-compat (=12),
